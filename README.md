@@ -1,7 +1,7 @@
 CodeIgniter Debug Toolbar
 =========================
 
-This is a modified version of the original debug toolbar for CodeIgniter ported from Kohana
+This is a modified version of the original debug toolbar for CodeIgniter ported from Kohana <br />
 Version 0.2.1 (ready for CodeIgniter 2.0-dev)
 
 
@@ -19,13 +19,13 @@ Installation
 - copy assets folder to webroot
 - copy all other content to respective application subdirectories
 - enable hooks in application config
-- add the following to config/hooks config:
-  $hook['display_override'] = array(
-    'class' => 'debug_toolbar',
-    'function' => 'render',
-    'filename' => 'debug_toolbar.php',
-    'filepath' => 'hooks'
-  );
+- add the following to config/hooks config: <br />
+	$hook['display_override'] = array(
+	'class' => 'debug_toolbar',
+	'function' => 'render',
+	'filename' => 'debug_toolbar.php',
+	'filepath' => 'hooks'
+	);
 - configure the config/debug_toolbar config
 
 Additions/Changes
