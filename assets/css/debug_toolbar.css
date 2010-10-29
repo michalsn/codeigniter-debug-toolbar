@@ -1,0 +1,190 @@
+/* Reset */
+div#codeigniter-debug-toolbar,
+div#codeigniter-debug-toolbar div,
+div#codeigniter-debug-toolbar span,
+div#codeigniter-debug-toolbar pre,
+div#codeigniter-debug-toolbar h1,
+div#codeigniter-debug-toolbar img,
+div#codeigniter-debug-toolbar a,
+div#codeigniter-debug-toolbar ul, 
+div#codeigniter-debug-toolbar li,
+div#codeigniter-debug-toolbar table,
+div#codeigniter-debug-toolbar tr,
+div#codeigniter-debug-toolbar td,
+div#codeigniter-debug-toolbar th {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: middle;
+	background: transparent;
+	line-height: 1;
+	text-transform: none;
+	font-size:100%;
+}
+div#codeigniter-debug-toolbar table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+div#codeigniter-debug-toolbar :focus { outline: 0; }
+div#codeigniter-debug-toolbar ul {
+	list-style:none;
+}
+
+/* Global */
+div#codeigniter-debug-toolbar {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color: #333;
+	text-align: left;
+	line-height: 12px;
+}
+div#codeigniter-debug-toolbar h1 {
+  font-size: 16px;
+  font-weight: bold;
+	margin-top: 30px;
+  margin-bottom: 10px;
+  padding:0px 5px;
+  border: 0px;
+  background-color: #eee;
+	color: #000;
+	display:block;
+}
+div#codeigniter-debug-toolbar a, 
+div#codeigniter-debug-toolbar a:hover {
+  text-decoration: none;
+  color: #222;
+}
+div#codeigniter-debug-toolbar pre { line-height: 1.3 }
+div#codeigniter-debug-toolbar .top {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	z-index: 9999;
+	border-bottom: 1px solid #aaa;
+	background-color: #efefef;
+	padding: 10px;
+}
+
+/* Tables */
+div#codeigniter-debug-toolbar table {
+  padding: 3px;
+  font-size: 11px;
+	border: 1px solid #999;
+	width: 99%;
+	margin:0px 5px;
+	font-family: monospace;
+}
+div#codeigniter-debug-toolbar td {
+  padding: 3px 3px;
+  vertical-align: top;
+	background-color: #eee;
+}
+div#codeigniter-debug-toolbar tr.odd td {
+	background-color: #ddd;
+}
+div#codeigniter-debug-toolbar th {
+  padding: 3px 5px;
+  vertical-align: top;
+  background-color: #999;
+  color: #eee;
+  white-space: nowrap;
+}
+div#codeigniter-debug-toolbar td,
+div#codeigniter-debug-toolbar th {
+	border: 1px solid #efefef;
+}
+
+/* Toolbar */
+div#codeigniter-debug-toolbar div#debug-toolbar {
+	position: fixed;
+	padding: 0 0 3px 0;
+	top: 0px;
+	opacity: 0.8;
+	filter: alpha(opacity:80);
+	z-index: 10000;
+	white-space: nowrap;
+	line-height: 16px;
+	background-color: #ccc;
+}
+div#codeigniter-debug-toolbar div#debug-toolbar.debug-toolbar-align-center { left: auto; right: auto; }
+div#codeigniter-debug-toolbar div#debug-toolbar.debug-toolbar-align-right { right: 0; }
+div#codeigniter-debug-toolbar div#debug-toolbar.debug-toolbar-align-left { left: 0; }
+div#codeigniter-debug-toolbar div#debug-toolbar img { vertical-align: middle; }
+div#codeigniter-debug-toolbar div#debug-toolbar ul.menu {
+	padding: 5px;
+	display: inline;
+}
+div#codeigniter-debug-toolbar div#debug-toolbar ul.menu li {
+	display: inline;
+  list-style: none;
+  padding: 0 5px;
+  border-right: 1px solid #aaa;
+	cursor: pointer;
+	line-height: 16px;
+}
+div#codeigniter-debug-toolbar div#debug-toolbar ul.menu li.last { 
+	border: none;
+}
+
+/* Benchmarks */
+div#codeigniter-debug-toolbar div#debug-benchmarks { padding: 3px 0px; }
+
+/* SQL queries */
+div#codeigniter-debug-toolbar div#debug-database { padding: 3px 0px; }
+
+/* Vars & Config */
+div#codeigniter-debug-toolbar div#debug-vars {
+	padding: 3px 0px; 
+}
+div#codeigniter-debug-toolbar div#debug-vars pre {
+	background-color: #ddd;
+	padding: 5px;
+	color: #333;
+}
+div#codeigniter-debug-toolbar div#debug-vars .varmenu { 
+  margin: 20px 0 0 0; 
+	height: 23px;
+}
+div#codeigniter-debug-toolbar div#debug-vars .varmenu li {
+	float: left;
+	display: block;
+	padding: 5px;
+	margin: 0 6px 0 0;
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	cursor:  pointer;
+}
+div#codeigniter-debug-toolbar div#debug-vars .varmenu li.active {
+	background-color: #ddd;
+	color: #000;
+}
+div#codeigniter-debug-toolbar div#debug-vars .configmenu { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li {
+	display: block;
+	padding: 5px;
+	cursor: pointer;
+}
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li.odd { background-color: #eee; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li.even { background-color: #fff; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li.odd pre { background-color: #eee; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li.even pre { background-color: #fff; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.odd { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.even { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.odd pre { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.even pre { background-color: #ddd; }
+
+/* Logs & Msgs */
+div#codeigniter-debug-toolbar div#debug-log {
+	padding: 3px 0px;
+	font-size: 11px;
+}
+
+/* Ajax */
+div#codeigniter-debug-toolbar div#debug-ajax {
+	padding: 3px 0px;
+	font-size: 11px;
+}
