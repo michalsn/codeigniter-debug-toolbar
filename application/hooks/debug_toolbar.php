@@ -310,7 +310,7 @@ class debug_toolbar {
 					$filename = $path . $filename;// $this->_strip_ext($file);
 
 					// filter skip configs
-					if (in_array($file, $skip) || (substr($filename, -4) != EXT))
+					if (in_array($file, $skip) || (substr($filename, -4) != '.php'))
 					{
 						continue;
 					}
