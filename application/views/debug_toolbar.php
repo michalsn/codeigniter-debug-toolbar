@@ -254,12 +254,14 @@
 						<th width="50%">Key</th>
 						<th width="50%">Value</th>
 					</tr>
-					<?php foreach ((array)$_SESSION as $key => $value): ?>
-						<tr class="<?php echo alternator('odd','even')?>">
-							<td><?php echo $key ?></td>
-							<td><?php echo $value ?></td>
-						</tr>
-					<?php endforeach; ?>
+					<?php if (isset($_SESSION)): ?>
+						<?php foreach ((array)$_SESSION as $key => $value): ?>
+							<tr class="<?php echo alternator('odd','even')?>">
+								<td><?php echo $key ?></td>
+								<td><?php echo $value ?></td>
+							</tr>
+						<?php endforeach; ?>
+					<?php endif; ?>
 				</table>
 			</div>
 		</div>
