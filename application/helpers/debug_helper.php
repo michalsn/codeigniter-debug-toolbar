@@ -14,14 +14,15 @@ function quark_dump($var, $return = FALSE, $use_xdebug = TRUE)
 		}
 		else
 			$out = "<pre class='quark-dump'>" . htmlentities(var_export($var, $return), ENT_QUOTES, "utf-8") . "</pre>";
-		
+
 		return $out;
 	}
 	else
 	{
 		if ($use_xdebug)
 			xdebug_var_dump($var);
-		else 
+		else
 			echo "<pre class='quark-dump'>" . htmlentities(var_export($var, TRUE), ENT_QUOTES, "utf-8") . "</pre>";
 	}
+
 }
