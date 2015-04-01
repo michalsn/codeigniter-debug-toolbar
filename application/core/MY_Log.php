@@ -4,8 +4,8 @@ class MY_Log extends CI_Log {
 	
 	var $logs = array();
 	
-	function MY_Log(){
-		parent::CI_Log();
+	function __construct(){
+		parent::__construct();
 	}
 	
 	function write_log($level = 'error', $msg, $php_error = FALSE){
