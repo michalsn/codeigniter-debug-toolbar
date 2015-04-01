@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or die('No direct script access.') ?>
 
 <?php
-	$this->load->helper(array('date', 'url', 'html', 'string', 'debug'));
+	//$this->load->helper(array('date', 'url', 'html', 'string', 'debug'));
 ?>
 
 <style type="text/css">
@@ -15,91 +15,114 @@
 <div id="codeigniter-debug-toolbar">
 
 	<!-- toolbar -->
-	<div id="debug-toolbar" style="<?php echo $align ?>">
+	<div id="debug-toolbar">
 		<!-- Kohana link -->
 <!--		<?php echo anchor(
-			"http://codeigniter.com", 
-			img($this->config->item('icon_path').'/debug_toolbar_codeigniter.png'), 
+			"http://codeigniter.com",
+			img($this->config->item('icon_path').'/debug_toolbar_codeigniter.png'),
 			array('target' => '_blank')
 		) ?>
--->		
+-->
 		<ul class="menu">
-			
+
 			<!-- Codeigniter version -->
-			<li>
+			<li title="Codeigniter Version" class="first">
 				<?php echo anchor("http://codeigniter.com/", img($this->config->item('icon_path').'/debug_toolbar_codeigniter.png'),array('target' => '_blank')) ?>
 				<?php echo anchor("http://codeigniter.com/", CI_VERSION, array('target' => '_blank')) ?>
 			</li>
-			
+
 			<!-- Benchmarks -->
-			<?php if ($panels['benchmarks']): ?>
-				<li id="time" onclick="debugToolbar.show('debug-benchmarks'); return false;">
+			<?php if ($panels['benchmarks']):
+				foreach ((array)$benchmarks as $benchmark):
+					$ElapsedTime = isset($ElapsedTime) ? $ElapsedTime + $benchmark['diff'] : $benchmark['diff'];
+					endforeach;
+				?>
+				<li id="time" onclick="debugToolbar.show('debug-benchmarks'); return false;" title="Time">
 					<?php echo img($this->config->item('icon_path').'/debug_toolbar_time.png') ?>
-					<?php echo $this->benchmark->elapsed_time() ?> s
+					<?php echo sprintf('%.2f', $ElapsedTime * 1000) ?> ms
 				</li>
-				<li id="memory" onclick="debugToolbar.show('debug-benchmarks'); return false;">
+				<li id="memory" onclick="debugToolbar.show('debug-benchmarks'); return false;" title="Memory">
 					<?php echo img($this->config->item('icon_path').'/debug_toolbar_memory.png') ?>
-					<?php echo $this->benchmark->memory_usage() ?>
+					{memory_usage}
 				</li>
 			<?php endif ?>
-			
+
 			<!-- Queries -->
 			<?php if ($panels['database']): ?>
-				<li id="toggle-database" onclick="debugToolbar.show('debug-database'); return false;">
+				<li id="toggle-database" onclick="debugToolbar.show('debug-database'); return false;" title="SQL Log">
 					<?php echo img($this->config->item('icon_path').'/debug_toolbar_database.png') ?>
-					<?php echo isset($queries) ? count($queries) : 0 ?>
+					SQL Log (<?php echo isset($queries) ? count($queries) : 0 ?>)
 				</li>
 			<?php endif ?>
-			
+
 			<!-- Vars and Config -->
-			<?php if ($panels['vars_and_config']): ?>
-				<li id="toggle-vars" onclick="debugToolbar.show('debug-vars'); return false;">
-					<?php echo img($this->config->item('icon_path').'/debug_toolbar_config.png') ?>
-					vars &amp; config
+			<?php if ($panels['requests']): ?>
+				<li id="toggle-vars" onclick="debugToolbar.show('debug-vars'); return false;" title="Request">
+					<?php echo img($this->config->item('icon_path').'/debug_toolbar_requests.png') ?>
+					Requests
 				</li>
 			<?php endif ?>
-			
+			<?php if ($panels['configs']): ?>
+				<li id="toggle-configs" onclick="debugToolbar.show('debug-configs'); return false;" title="Configs">
+					<?php echo img($this->config->item('icon_path').'/debug_toolbar_config.png') ?>
+					Configs
+				</li>
+				<?php endif ?>
+				<?php if ($panels['sessions']): ?>
+				<li id="toggle-configs" onclick="debugToolbar.show('debug-sessions'); return false;" title="Sessions">
+					<?php echo img($this->config->item('icon_path').'/debug_toolbar_sessions.png') ?>
+					Sessions
+				</li>
+				<?php endif ?>
+				<?php if ($panels['cookies']): ?>
+				<li id="toggle-cookies" onclick="debugToolbar.show('debug-cookies'); return false;" title="Cookies">
+					<?php echo img($this->config->item('icon_path').'/debug_toolbar_cookies.png') ?>
+					Cookies
+				</li>
+			<?php endif ?>
+
 			<!-- Logs -->
 			<?php if ($panels['logs']): ?>
-				<li id="toggle-log" onclick="debugToolbar.show('debug-log'); return false;">
+				<li id="toggle-log" onclick="debugToolbar.show('debug-log'); return false;" title="Log">
 					<?php echo img($this->config->item('icon_path').'/debug_toolbar_logs.png') ?>
-					logs
+					Logs
 				</li>
 			<?php endif ?>
-			
+
 			<!-- Ajax -->
 			<?php if ($panels['ajax']): ?>
-				<li id="toggle-ajax" onclick="debugToolbar.show('debug-ajax'); return false;" style="display: none">
+				<li id="toggle-ajax" onclick="debugToolbar.show('debug-ajax'); return false;" style="display: none" title="Ajax">
 					<?php echo img($this->config->item('icon_path').'/debug_toolbar_ajax.png') ?>
-					ajax (<span>0</span>)
+					Ajax (<span>0</span>)
 				</li>
 			<?php endif ?>
-		
 
-                        <!-- Files -->
-                        <?php if ($panels['files']): ?>
-                                <li id="toggle-files" onclick="debugToolbar.show('debug-files'); return false;">
-                                        <?php echo img($this->config->item('icon_path').'/debug_toolbar_files.png') ?>
-                                        files
-                                </li>
-                        <?php endif ?>
-	
-			<!-- Swap sides -->
+
+      <!-- Files -->
+      <?php if ($panels['files']): ?>
+              <li id="toggle-files" onclick="debugToolbar.show('debug-files'); return false;" title="Files">
+                      <?php echo img($this->config->item('icon_path').'/debug_toolbar_files.png') ?>
+                      files
+              </li>
+      <?php endif ?>
+
+			<!-- Swap sides
 			<li onclick="debugToolbar.swap(); return false;">
 				<?php echo img($this->config->item('icon_path').'/debug_toolbar_text_align_left.png') ?>
 			</li>
-			
+			-->
+
 			<!-- Close -->
-			<li class="last" onclick="debugToolbar.close(); return false;">
+			<li class="last" onclick="debugToolbar.close(); return false;" title="Close">
 				<?php echo img($this->config->item('icon_path').'/debug_toolbar_close.png') ?>
 			</li>
 		</ul>
 	</div>
-	
+
 	<!-- benchmarks -->
 	<?php if ($panels['benchmarks']): ?>
 		<div id="debug-benchmarks" class="top" style="display: none;">
-			<h1>Benchmarks</h1>
+			<h1>Time & Memory</h1>
 			<table cellspacing="0" cellpadding="0">
 				<tr>
 					<th align="left">benchmark</th>
@@ -125,7 +148,7 @@
 			</table>
 		</div>
 	<?php endif ?>
-	
+
 	<!-- database -->
 	<?php if ($panels['database']): ?>
 		<div id="debug-database" class="top" style="display: none;">
@@ -146,7 +169,7 @@
 						<td><?php echo sprintf('%.3f', $query['time'] * 1000)?> ms</td>
 						<td><?php echo $query['rows'] == -1 ? '-' : $query['rows'] ?></td>
 					</tr>
-					<?php 
+					<?php
 					$total_time += $query['time'];
 					$total_rows += $query['rows'] == -1 ? 0 : $query['rows'];
 					?>
@@ -160,41 +183,110 @@
 			</table>
 		</div>
 	<?php endif ?>
-	
+
 	<!-- vars and config -->
-	<?php if ($panels['vars_and_config']): ?>
+	<?php if ($panels['requests']): ?>
 		<div id="debug-vars" class="top" style="display: none;">
-			<h1>vars &amp; config</h1>
+			<h1>Requests</h1>
 			<ul class="varmenu">
 				<li onclick="debugToolbar.showvar(this, 'vars-post'); return false;">POST</li>
 				<li onclick="debugToolbar.showvar(this, 'vars-get'); return false;">GET</li>
-				<li onclick="debugToolbar.showvar(this, 'vars-server'); return false;">SERVER</li>
-				<li onclick="debugToolbar.showvar(this, 'vars-cookie'); return false;">COOKIE</li>
-				<li onclick="debugToolbar.showvar(this, 'vars-session'); return false;">SESSION</li>
-				<li onclick="debugToolbar.showvar(this, 'vars-config'); return false;">CONFIG</li>
 			</ul>
 			<div style="display: none;" id="vars-post">
-				<?php echo isset($_POST) ? quark_dump($_POST) : quark_dump(array()) ?>
+				<table cellspacing="0" cellpadding="0">
+					<tr align="left">
+						<th width="50%">Key</th>
+						<th width="50%">Value</th>
+					</tr>
+					<?php foreach ((array)$_POST as $key => $value): ?>
+						<tr class="<?php echo alternator('odd','even')?>">
+							<td><?php echo $key ?></td>
+							<td><?php echo $value ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
 			</div>
 			<div style="display: none;" id="vars-get">
-				<?php echo isset($_GET) ? quark_dump($_GET) : quark_dump(array()) ?>
+				<table cellspacing="0" cellpadding="0">
+					<tr align="left">
+						<th width="50%">Key</th>
+						<th width="50%">Value</th>
+					</tr>
+					<?php foreach ((array)$_GET as $key => $value): ?>
+						<tr class="<?php echo alternator('odd','even')?>">
+							<td><?php echo $key ?></td>
+							<td><?php echo $value ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
 			</div>
-			<div style="display: none;" id="vars-server">
-				<?php echo isset($_SERVER) ? quark_dump($_SERVER) : quark_dump(array()) ?>
+		</div>
+	<?php endif ?>
+
+	<!-- cookies -->
+	<?php if ($panels['cookies']): ?>
+		<div id="debug-cookies" class="top" style="display: none;">
+			<h1>Cookies</h1>
+			<div id="vars-cookie">
+				<table cellspacing="0" cellpadding="0">
+					<tr align="left">
+						<th width="50%">Key</th>
+						<th width="50%">Value</th>
+					</tr>
+					<?php foreach ((array)$_COOKIE as $key => $value): ?>
+						<tr class="<?php echo alternator('odd','even')?>">
+							<td><?php echo $key ?></td>
+							<td><?php echo $value ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
 			</div>
-			<div style="display: none;" id="vars-cookie">
-				<?php echo isset($_COOKIE) ? quark_dump($_COOKIE) : quark_dump(array()) ?>
+		</div>
+	<?php endif ?>
+
+	<!-- sessions -->
+	<?php if ($panels['sessions']): ?>
+		<div id="debug-sessions" class="top" style="display: none;">
+			<h1>Sessions</h1>
+			<div id="vars-session">
+				<table cellspacing="0" cellpadding="0">
+					<tr align="left">
+						<th width="50%">Key</th>
+						<th width="50%">Value</th>
+					</tr>
+					<?php foreach ((array)$_SESSION as $key => $value): ?>
+						<tr class="<?php echo alternator('odd','even')?>">
+							<td><?php echo $key ?></td>
+							<td><?php echo $value ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
 			</div>
-			<div style="display: none;" id="vars-session">
-				<?php echo isset($_SESSION) ? quark_dump($_SESSION) : quark_dump(array()) ?>
-			</div>
-			<div style="display: none;" id="vars-config">
+		</div>
+	<?php endif ?>
+
+	<!-- configs -->
+	<?php if ($panels['configs']): ?>
+		<div id="debug-configs" class="top" style="display: none;">
+			<h1>Configs</h1>
+			<div id="vars-config">
 				<ul class="configmenu">
 					<?php foreach ($configs as $section => $vars): ?>
 						<li class="<?php echo alternator('odd', 'even') ?>" onclick="debugToolbar.toggle('vars-config-<?php echo $section ?>'); return false;">
 							<div><?php echo $section ?></div>
 							<div style="display: none;" id="vars-config-<?php echo $section ?>">
-								<?php echo quark_dump($vars) ?>
+								<table cellspacing="0" cellpadding="0">
+									<tr align="left">
+										<th width="50%">Key</th>
+										<th width="50%">Value</th>
+									</tr>
+									<?php foreach ((array)$vars as $key => $value): ?>
+										<tr class="autoBackground">
+											<td><?php echo $key ?></td>
+											<td><?php echo $value ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</table>
 							</div>
 						</li>
 					<?php endforeach; ?>
@@ -202,11 +294,11 @@
 			</div>
 		</div>
 	<?php endif ?>
-	
+
 	<!-- logs and messages -->
 	<?php if ($panels['logs']): ?>
 		<div id="debug-log" class="top" style="display: none;">
-			<h1>logs &amp; msgs</h1>
+			<h1>Logs</h1>
 			<table cellspacing="0" cellpadding="0">
 				<tr align="left">
 					<th width="1%">#</th>
@@ -262,11 +354,11 @@
                         </table>
                 </div>
         <?php endif ?>
-	
+
 	<!-- ajax -->
 	<?php if ($panels['ajax']): ?>
 		<div id="debug-ajax" class="top" style="display:none;">
-			<h1>ajax</h1>
+			<h1>Ajax</h1>
 			<table cellspacing="0" cellpadding="0">
 				<tr align="left">
 					<th width="1%">#</th>

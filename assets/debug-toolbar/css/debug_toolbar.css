@@ -1,3 +1,4 @@
+
 /* Reset */
 div#codeigniter-debug-toolbar,
 div#codeigniter-debug-toolbar div,
@@ -6,7 +7,7 @@ div#codeigniter-debug-toolbar pre,
 div#codeigniter-debug-toolbar h1,
 div#codeigniter-debug-toolbar img,
 div#codeigniter-debug-toolbar a,
-div#codeigniter-debug-toolbar ul, 
+div#codeigniter-debug-toolbar ul,
 div#codeigniter-debug-toolbar li,
 div#codeigniter-debug-toolbar table,
 div#codeigniter-debug-toolbar tr,
@@ -35,15 +36,20 @@ div#codeigniter-debug-toolbar ul {
 /* Global */
 div#codeigniter-debug-toolbar {
 	font-family: Arial, sans-serif;
-	font-size: 12px;
+	font-size: 15px;
 	color: #333;
 	text-align: left;
 	line-height: 12px;
+	position:absolute;
+	top:0;
+	left: 0;
+	width:100%;
+	min-height: 30px;
 }
 div#codeigniter-debug-toolbar h1 {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
-	margin-top: 30px;
+	margin-top: 45px;
   margin-bottom: 10px;
   padding:0px 5px;
   border: 0px;
@@ -51,7 +57,7 @@ div#codeigniter-debug-toolbar h1 {
 	color: #000;
 	display:block;
 }
-div#codeigniter-debug-toolbar a, 
+div#codeigniter-debug-toolbar a,
 div#codeigniter-debug-toolbar a:hover {
   text-decoration: none;
   color: #222;
@@ -61,20 +67,20 @@ div#codeigniter-debug-toolbar .top {
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	width: 100%;
+	width: 99%;
 	z-index: 9999;
 	border-bottom: 1px solid #aaa;
 	background-color: #efefef;
-	padding: 10px;
+	padding: 0.5%;
 }
 
 /* Tables */
 div#codeigniter-debug-toolbar table {
   padding: 3px;
-  font-size: 11px;
+  font-size: 13px;
 	border: 1px solid #999;
 	width: 99%;
-	margin:0px 5px;
+	margin: 0.5%;
 	font-family: monospace;
 }
 div#codeigniter-debug-toolbar td {
@@ -82,15 +88,21 @@ div#codeigniter-debug-toolbar td {
   vertical-align: top;
 	background-color: #eee;
 }
-div#codeigniter-debug-toolbar tr.odd td {
+div#codeigniter-debug-toolbar tr.odd td,
+div#codeigniter-debug-toolbar tr.autoBackground:nth-child(odd) td {
 	background-color: #ddd;
 }
+div#codeigniter-debug-toolbar tr.autoBackground:nth-child(even) td {
+	background-color: #eee;
+}
+
 div#codeigniter-debug-toolbar th {
   padding: 3px 5px;
   vertical-align: top;
   background-color: #999;
   color: #eee;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 div#codeigniter-debug-toolbar td,
 div#codeigniter-debug-toolbar th {
@@ -99,34 +111,40 @@ div#codeigniter-debug-toolbar th {
 
 /* Toolbar */
 div#codeigniter-debug-toolbar div#debug-toolbar {
-	position: fixed;
-	padding: 0 0 3px 0;
-	top: 0px;
-	opacity: 0.8;
-	filter: alpha(opacity:80);
+	padding: 0;
 	z-index: 10000;
 	white-space: nowrap;
 	line-height: 16px;
 	background-color: #ccc;
+	position:absolute;
+	left: 0;
+	top: 0;
+	width:100%;
 }
 div#codeigniter-debug-toolbar div#debug-toolbar.debug-toolbar-align-center { left: auto; right: auto; }
 div#codeigniter-debug-toolbar div#debug-toolbar.debug-toolbar-align-right { right: 0; }
 div#codeigniter-debug-toolbar div#debug-toolbar.debug-toolbar-align-left { left: 0; }
 div#codeigniter-debug-toolbar div#debug-toolbar img { vertical-align: middle; }
 div#codeigniter-debug-toolbar div#debug-toolbar ul.menu {
-	padding: 5px;
 	display: inline;
 }
 div#codeigniter-debug-toolbar div#debug-toolbar ul.menu li {
 	display: inline;
+	float:left;
   list-style: none;
-  padding: 0 5px;
-  border-right: 1px solid #aaa;
+  padding: 8px;
+  border-left: 1px solid #aaa;
 	cursor: pointer;
 	line-height: 16px;
 }
-div#codeigniter-debug-toolbar div#debug-toolbar ul.menu li.last { 
+
+div#codeigniter-debug-toolbar div#debug-toolbar ul.menu li.first {
 	border: none;
+}
+
+div#codeigniter-debug-toolbar div#debug-toolbar ul.menu li.last {
+	display: inline;
+	float:right !important;
 }
 
 /* Benchmarks */
@@ -137,16 +155,17 @@ div#codeigniter-debug-toolbar div#debug-database { padding: 3px 0px; }
 
 /* Vars & Config */
 div#codeigniter-debug-toolbar div#debug-vars {
-	padding: 3px 0px; 
+	/*padding: 3px 0px;*/
 }
 div#codeigniter-debug-toolbar div#debug-vars pre {
 	background-color: #ddd;
 	padding: 5px;
 	color: #333;
 }
-div#codeigniter-debug-toolbar div#debug-vars .varmenu { 
-  margin: 20px 0 0 0; 
+div#codeigniter-debug-toolbar div#debug-vars .varmenu {
+  margin: 20px 0.5%;
 	height: 23px;
+	width:99%
 }
 div#codeigniter-debug-toolbar div#debug-vars .varmenu li {
 	float: left;
@@ -162,20 +181,20 @@ div#codeigniter-debug-toolbar div#debug-vars .varmenu li.active {
 	background-color: #ddd;
 	color: #000;
 }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu { background-color: #ddd; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li {
+div#codeigniter-debug-toolbar div#debug-configs .configmenu { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li {
 	display: block;
 	padding: 5px;
 	cursor: pointer;
 }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li.odd { background-color: #eee; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li.even { background-color: #fff; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li.odd pre { background-color: #eee; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li.even pre { background-color: #fff; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.odd { background-color: #ddd; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.even { background-color: #ddd; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.odd pre { background-color: #ddd; }
-div#codeigniter-debug-toolbar div#debug-vars .configmenu li:hover.even pre { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li.odd { background-color: #eee; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li.even { background-color: #fff; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li.odd pre { background-color: #eee; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li.even pre { background-color: #fff; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li:hover.odd { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li:hover.even { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li:hover.odd pre { background-color: #ddd; }
+div#codeigniter-debug-toolbar div#debug-configs .configmenu li:hover.even pre { background-color: #ddd; }
 
 /* Logs & Msgs */
 div#codeigniter-debug-toolbar div#debug-log {
